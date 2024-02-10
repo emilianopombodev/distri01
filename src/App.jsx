@@ -4,7 +4,7 @@ import Header from './components/Header';
 import Contact from './components/Contact';
 import About from './components/About';
 import Index from './components/Index';
-
+import Products from './components/Products';
 
 function App() {
   const [activeLink, setActiveLink] = useState('inicio');
@@ -23,6 +23,9 @@ function App() {
     case 'about':
       componenteRenderizado = <About />;
       break;
+    case 'products':
+      componenteRenderizado = <Products />;
+      break;
     case 'contact':
       componenteRenderizado = <Contact />;
       break;
@@ -37,7 +40,6 @@ function App() {
       <div>
         {componenteRenderizado}
       </div>
-      <div>Valor de activeLink en App: {activeLink}</div>
     </div>
   );
 }
