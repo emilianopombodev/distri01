@@ -1,37 +1,45 @@
-import { useState, useEffect } from 'react'
-import Formulario from "./components/Formulario"
-import Header from "./components/Header"
-import ListadoPacientes from "./components/ListadoPacientes"
+// App.js
+import React, { useState } from 'react';
+import Header from './components/Header';
+import Contact from './components/Contact';
+import About from './components/About';
+import Index from './components/Index';
+
 
 function App() {
+  const [activeLink, setActiveLink] = useState('inicio');
+  let componenteRenderizado;
 
-  const [pacientes, setPacientes] = useState([]);
-  const [paciente, setPaciente] = useState({});
+  // Función para actualizar el valor de activeLink
+  const handleSetActiveLink = (link) => {
+    setActiveLink(link);
+  };
 
-  useEffect(() => {
-    const obtenerLS = () => {
-      const pacientesLS = JSON.parse(localStorage.getItem('pacientes')) ?? [];
-      setPacientes(pacientesLS)
-    }
-    obtenerLS();
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('pacientes', JSON.stringify( pacientes ));
-  }, [pacientes])
-
-  const eliminarPaciente = id => {
-    const pacientesActualizados = pacientes.filter( paciente => paciente.id !== id);
-    setPacientes(pacientesActualizados)
+  // Definir qué componente renderizar según activeLink
+  switch (activeLink) {
+    case 'index':
+      componenteRenderizado= <Index/>;
+      break;
+    case 'about':
+      componenteRenderizado = <About />;
+      break;
+    case 'contact':
+      componenteRenderizado = <Contact />;
+      break;
+    default:
+      componenteRenderizado = null;
   }
 
   return (
     <div>
-      <Header />
-
-
+      <Header setActiveLink={handleSetActiveLink} activeLink={activeLink} />
+      {/* Renderizar el componente correspondiente */}
+      <div>
+        {componenteRenderizado}
+      </div>
+      <div>Valor de activeLink en App: {activeLink}</div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
