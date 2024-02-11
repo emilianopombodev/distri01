@@ -4,7 +4,9 @@ import Header from './components/Header';
 import Contact from './components/Contact';
 import About from './components/About';
 import Index from './components/Index';
+import Footer from './components/Footer';
 import Products from './components/Products';
+
 
 function App() {
   const [activeLink, setActiveLink] = useState('inicio');
@@ -40,6 +42,7 @@ function App() {
       <div>
         {componenteRenderizado}
       </div>
+      <Footer/>
     </div>
   );
 }
